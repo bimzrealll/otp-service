@@ -1,18 +1,12 @@
 {
   "name": "otp-service",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "OTP service dengan Vercel + Nodemailer",
+  "main": "api/sendOtp.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node api/sendOtp.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
-    "body-parser": "^2.2.0",
-    "cors": "^2.8.5",
-    "express": "^5.1.0",
     "nodemailer": "^7.0.6"
   }
 }

@@ -2,17 +2,22 @@ const nodemailer = require("nodemailer");
 
 module.exports = async (req, res) => {
   if (req.method !== "POST") {
-    return res.status(405).json({ success: false, message: "Method not allowed" });
+    return res
+      .status(405)
+      .json({ success: false, message: "Method Not Allowed" });
   }
 
   const { email } = req.body;
   if (!email) {
-    return res.status(400).json({ success: false, message: "Email harus disertakan" });
+    return res
+      .status(400)
+      .json({ success: false, message: "Email harus disertakan" });
   }
 
-  // Generate OTP
+  // Generate OTP 6 digit
   const otp = Math.floor(100000 + Math.random() * 900000);
 
+  // Transporter Gmail (pakai App Password, bukan password biasa)
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
@@ -31,9 +36,12 @@ module.exports = async (req, res) => {
 
   try {
     await transporter.sendMail(mailOptions);
-    return res.json({ success: true, otp });
+    console.log(OTP terkirim ke ${email}: ${otp});
+    res.status(200).json({ success: true, otp });
   } catch (error) {
     console.error("Gagal kirim email:", error);
-    return res.status(500).json({ success: false, message: "Gagal mengirim OTP" });
+    res
+      .status(500)
+      .json({ success: false, message: "Gagal mengirim OTP" });
   }
 };
