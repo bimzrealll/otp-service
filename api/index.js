@@ -28,7 +28,7 @@ app.post("/sendOtp", async (req, res) => {
   const otp = Math.floor(100000 + Math.random() * 900000);
 
   const mailOptions = {
-    from: "Your App <herodigitalapp@gmail.com>",
+    from: "HeroMobile OTP <herodigitalapp@gmail.com>",
     to: email,
     subject: "Kode OTP Verifikasi",
     text: Kode OTP Anda adalah: ${otp} (berlaku 5 menit).,
@@ -45,8 +45,5 @@ app.post("/sendOtp", async (req, res) => {
   }
 });
 
-// Jalankan server
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(Server running on port ${PORT});
-});
+// Jangan pakai app.listen di Vercel
+module.exports = app;
